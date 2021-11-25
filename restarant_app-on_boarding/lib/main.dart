@@ -90,8 +90,8 @@ class RestarantApp extends StatelessWidget {
                         statusBarIconBrightness: Brightness.dark,
                       )),
                   bottomNavigationBarTheme: BottomNavigationBarThemeData(
-                      // backgroundColor: Colors.black12,
-                      unselectedItemColor: Colors.white,
+                       backgroundColor: Colors.black12,
+                      unselectedItemColor: Colors.grey,
                       selectedItemColor: Colors.red[100],
                       elevation: 0,
                       selectedLabelStyle: TextStyle(fontFamily: 'Cairo'),
