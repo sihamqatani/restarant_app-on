@@ -28,6 +28,5 @@ class CustomLogo extends StatelessWidget {
         ),
       ],
     );
-    ;
   }
 }

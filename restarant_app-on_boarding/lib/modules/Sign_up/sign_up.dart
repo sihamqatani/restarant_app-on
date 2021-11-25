@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_conditional_rendering/conditional.dart';
@@ -8,6 +9,7 @@ import 'package:restarant_app/modules/Sign_up/widgets/custom_logo.dart';
 import 'package:restarant_app/modules/Sign_up/widgets/custom_red_container.dart';
 import 'package:restarant_app/modules/sign_in/sign_in.dart';
 import 'package:restarant_app/shared/components/components.dart';
+import 'package:restarant_app/shared/shared_widgets/custom_text_form_feild.dart';
 
 class SignUp extends StatelessWidget {
   var formKey = GlobalKey<FormState>();
@@ -87,19 +89,19 @@ class SignUp extends StatelessWidget {
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.all(5.0),
-                                            child: Expanded(
-                                              child: defaultFormField(
-                                                controller: nameController,
-                                                type: TextInputType.name,
-                                                validate: (value) {
-                                                  if (value!.isEmpty)
-                                                    return 'الرجاء ادخل اسمك';
-                                                },
-                                                label: 'ادخل اسمك',
-                                                prefix: Icons.face,
-                                              ),
+                                            child: CustomTextFormField(
+                                              controller: nameController,
+                                              type: TextInputType.name,
+                                              prefix: Icons.face,
+                                              validate: (value) {
+                                                if (value!.isEmpty) {
+                                                  return 'ادخل اسمك';
+                                                }
+                                              },
+                                              label: 'ادخل بريدك',
                                             ),
                                           ),
+                                          // ),
                                           Padding(
                                             padding: const EdgeInsets.all(5.0),
                                             child: defaultFormField(

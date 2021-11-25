@@ -139,6 +139,5 @@ class CustomFoodCard extends StatelessWidget {
         ],
       ),
     );
-    ;
   }
 }
