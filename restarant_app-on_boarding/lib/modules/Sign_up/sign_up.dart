@@ -9,6 +9,7 @@ import 'package:restarant_app/modules/Sign_up/widgets/custom_logo.dart';
 import 'package:restarant_app/modules/Sign_up/widgets/custom_red_container.dart';
 import 'package:restarant_app/modules/sign_in/sign_in.dart';
 import 'package:restarant_app/shared/components/components.dart';
+import 'package:restarant_app/shared/components/navigate_and_finish.dart';
 import 'package:restarant_app/shared/shared_widgets/custom_text_form_feild.dart';
 
 class SignUp extends StatelessWidget {
@@ -23,7 +24,8 @@ class SignUp extends StatelessWidget {
     return BlocConsumer<SignUpCubit, RestarantSignUpStates>(
         listener: (context, state) {
       if (state is RestarantSignUPSuccessState) {
-        navigateAndFinish(context, SignIn());
+        NavigateAndFinish().navigateAndFinish(context, SignIn());
+        // navigateAndFinish(context, SignIn());
         showToast(state: ToastColorstate.SUCCESS, message: 'تم التسجيل بنجاح');
       }
     }, builder: (context, state) {
