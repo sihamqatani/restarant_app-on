@@ -6,7 +6,6 @@ import 'package:restarant_app/modules/details_food_screen/widgets/custom_bagroun
 import 'package:restarant_app/modules/details_food_screen/widgets/custom_container_details.dart';
 import 'package:restarant_app/modules/details_food_screen/widgets/custom_image_container.dart';
 import 'package:restarant_app/shared/components/components.dart';
-import 'package:restarant_app/shared/networks/cubit/mode_cubit/mode_cubit.dart';
 
 class FoodDetailsScreen extends StatelessWidget {
   String? image;

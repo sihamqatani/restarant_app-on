@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:restarant_app/modules/sign_in/sign_in.dart';
-import 'package:restarant_app/shared/components/components.dart';
-import 'package:restarant_app/shared/networks/local/cash_helper/cash_helper.dart';
+import 'package:restarant_app/modules/onBoarding/submit_data.dart';
+import 'package:restarant_app/modules/onBoarding/widget/on_boarding_item.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingModel {
@@ -45,16 +44,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         backgroundColor: Colors.white,
-        /* appBar: AppBar(
-          actions: [
-            TextButton(
-              onPressed: () {
-                submitData();
-              },
-              child: Text('ابدأ'),
-            ),
-          ],
-        ),*/
         body: Padding(
           padding: const EdgeInsets.all(20.0),
           child:
@@ -67,7 +56,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         isLast = true;
                       });
                       print('isLast');
-                      submitData();
+                      SubmitData().submitData();
                     } else {
                       print('is not last');
                       setState(() {
@@ -78,7 +67,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   itemCount: onBoardingmodel.length,
                   controller: boardController,
                   itemBuilder: (context, index) {
-                    return buildBoardItem(onBoardingmodel[index]);
+                    return onBoardingItem(
+                        onBoardingModel: onBoardingmodel[index]);
                   }),
             ),
             SizedBox(
@@ -120,75 +110,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           fontFamily: 'Cairo'),
                     ),
                     onPressed: () {
-                      submitData();
+                      SubmitData().submitData();
                     }))
-
-            /* Row(
-              children: [
-                Spacer(),
-                FloatingActionButton(
-                  onPressed: () {
-                    if (isLast) {
-                      submitData();
-                    } else {
-                      boardController.nextPage(
-                          duration: Duration(microseconds: 750),
-                          curve: Curves.fastLinearToSlowEaseIn);
-                    }
-                  },
-                  child: Icon(
-                    Icons.arrow_forward_ios_outlined,
-                    color: Colors.white,
-                  ),
-                  backgroundColor: Colors.red[200],
-                )
-              ],
-            )*/
           ]),
         ),
-      ),
-    );
-  }
-
-  void submitData() {
-    CashHelper.saveData(key: 'onBoarding', value: true).then((value) {
-      print('hello');
-      navigateAndFinish(context, SignIn());
-    });
-  }
-
-  Widget buildBoardItem(OnBoardingModel onBoardingmodel) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-              child: Image(
-            image: AssetImage(
-              onBoardingmodel.image,
-            ),
-            fit: BoxFit.cover,
-          )),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            onBoardingmodel.title,
-            style: Theme.of(context)
-                .textTheme
-                .headline4
-                ?.copyWith(color: Colors.red[300]),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(onBoardingmodel.body,
-              style: Theme.of(context)
-                  .textTheme
-                  .subtitle2
-                  ?.copyWith(color: Colors.red[100], fontSize: 14)),
-        ],
       ),
     );
   }

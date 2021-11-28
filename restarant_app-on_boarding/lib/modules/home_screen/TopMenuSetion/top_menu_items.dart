@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restarant_app/models/catoregy/catogrey_model.dart';
 import 'package:restarant_app/modules/catogragy_screen/catogragy_screen.dart';
-import 'package:restarant_app/shared/components/components.dart';
+import 'package:restarant_app/shared/navigator/navigate_to.dart';
 import 'package:restarant_app/shared/networks/cubit/mode_cubit/mode_cubit.dart';
 
 class TopMenuItems extends StatelessWidget {
@@ -18,7 +18,7 @@ class TopMenuItems extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 5),
               child: InkWell(
                 onTap: () {
-                  navigateTo(context, CatogryScreen());
+                  NavigateTo().navigateTo(context, CatogryScreen());
                 },
                 child: Container(
                   decoration: BoxDecoration(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
 //import 'package:shop01_app/modules/login_screen/shop_login_screen.dart';
@@ -15,34 +14,6 @@ void navigateAndFinish(context, widget) {
   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
     return widget;
   }), (Route<dynamic> route) => false);
-}
-
-void showToast({required String message, required ToastColorstate state}) {
-  Fluttertoast.showToast(
-      msg: message,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.CENTER,
-      timeInSecForIosWeb: 1,
-      backgroundColor: chooseToastColor(state),
-      textColor: Colors.white,
-      fontSize: 16.0);
-}
-
-enum ToastColorstate { SUCCESS, ERROR, WARNING }
-Color chooseToastColor(ToastColorstate state) {
-  Color color;
-  switch (state) {
-    case ToastColorstate.SUCCESS:
-      color = Colors.green;
-      break;
-    case ToastColorstate.WARNING:
-      color = Colors.amberAccent;
-      break;
-    case ToastColorstate.ERROR:
-      color = Colors.green;
-      break;
-  }
-  return color;
 }
 
 Widget loadingIndicator() {

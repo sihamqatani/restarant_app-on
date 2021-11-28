@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:restarant_app/models/food_details_model.dart/food_details_model.dart';
 import 'package:restarant_app/modules/details_food_screen/details_food_screen.dart';
-import 'package:restarant_app/shared/components/components.dart';
+import 'package:restarant_app/shared/navigator/navigate_to.dart';
 import 'package:restarant_app/shared/networks/cubit/mode_cubit/mode_cubit.dart';
+import 'package:restarant_app/shared/shared_widgets/custom_rating.dart';
 
 class CustomCard extends StatelessWidget {
   final FoodDetails foodDetails;
@@ -40,7 +40,7 @@ class CustomCard extends StatelessWidget {
               child: Center(
                 child: GestureDetector(
                   onTap: () {
-                    navigateTo(
+                    NavigateTo().navigateTo(
                         context,
                         FoodDetailsScreen(
                             image: foodDetails.imageUrl,
@@ -99,22 +99,7 @@ class CustomCard extends StatelessWidget {
                             fontSize: 22),
                       ),
                       Container(
-                        child: RatingBar.builder(
-                          itemSize: 20,
-                          initialRating: 1,
-                          minRating: 1,
-                          direction: Axis.horizontal,
-                          allowHalfRating: true,
-                          itemCount: 5,
-                          // itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                          itemBuilder: (context, _) => Icon(
-                            Icons.star,
-                            color: Colors.red[200],
-                          ),
-                          onRatingUpdate: (rating) {
-                            // print(rating);
-                          },
-                        ),
+                        child: CustomRating(onRatingUpdate: (onRating) {}),
                       ),
                     ],
                   ),
