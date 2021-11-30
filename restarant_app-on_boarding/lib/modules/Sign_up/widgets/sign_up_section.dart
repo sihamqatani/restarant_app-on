@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:restarant_app/modules/Sign_up/restarant_signup_cubit/signup_cubit/cubit.dart';
 import 'package:restarant_app/modules/Sign_up/restarant_signup_cubit/signup_cubit/states.dart';
 import 'package:restarant_app/modules/sign_in/sign_in.dart';
+import 'package:restarant_app/modules/sign_in/widgets/sign_in_section.dart';
+import 'package:restarant_app/shared/components/components.dart';
 import 'package:restarant_app/shared/components/loading_indicator.dart';
 import 'package:restarant_app/shared/components/show_toast.dart';
 import 'package:restarant_app/shared/navigator/navigate_and_finish.dart';
+import 'package:restarant_app/shared/navigator/navigate_to.dart';
 import 'package:restarant_app/shared/shared_widgets/custom_text_form_feild.dart';
 
 class SignUpSection extends StatelessWidget {
@@ -23,8 +27,7 @@ class SignUpSection extends StatelessWidget {
       if (state is RestarantSignUPSuccessState) {
         NavigateAndFinish().navigateAndFinish(context, SignIn());
         // navigateAndFinish(context, SignIn());
-        ShowToast().showToast(
-            message: 'تم التسجيل ينجاح', state: ToastColorstate.SUCCESS);
+
       }
     }, builder: (context, state) {
       return Form(
@@ -73,7 +76,7 @@ class SignUpSection extends StatelessWidget {
                             return 'ادخل اسمك';
                           }
                         },
-                        label: 'ادخل بريدك',
+                        label: 'ادخل اسمك',
                       ),
                     ),
                     // ),
@@ -119,7 +122,7 @@ class SignUpSection extends StatelessWidget {
                               return 'ادخل رقم الهاتف';
                             }
                           },
-                          label: 'ادخل كلمة المرور',
+                          label: 'ادخل رقم الهاتف',
                           onSubmit: (value) {
                             if (formKey.currentState!.validate()) {
                               print('done');
@@ -167,12 +170,10 @@ class SignUpSection extends StatelessWidget {
                                 },
                               );
                             },
-                            fallbackBuilder: (context) => Center(
-                                  child: Container(
-                                      height: 100,
-                                      width: 100,
-                                      child: LoadingIndicator()),
-                                )),
+                            fallbackBuilder: (context) => Container(
+                                width: 50,
+                                height: 50,
+                                child: loadingIndicator())),
                       ),
                     ),
                   ],

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:restarant_app/modules/onBoarding/submit_data.dart';
+
 import 'package:restarant_app/modules/onBoarding/widget/on_boarding_item.dart';
+import 'package:restarant_app/modules/sign_in/sign_in.dart';
+import 'package:restarant_app/shared/navigator/navigate_and_finish.dart';
+import 'package:restarant_app/shared/networks/local/cash_helper/cash_helper.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingModel {
@@ -37,6 +40,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         body: 'عيش طعم الحلا الاصلي ',
         image: 'assets/images/33.jpg'),
   ];
+  void submitData() {
+    CashHelper.saveData(key: 'onBoarding', value: true).then((value) {
+      print('hello');
+      NavigateAndFinish().navigateAndFinish(context, SignIn());
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +65,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         isLast = true;
                       });
                       print('isLast');
-                      SubmitData().submitData();
+                      submitData();
                     } else {
                       print('is not last');
                       setState(() {
@@ -110,7 +119,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           fontFamily: 'Cairo'),
                     ),
                     onPressed: () {
-                      SubmitData().submitData();
+                      submitData();
                     }))
           ]),
         ),

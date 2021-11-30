@@ -18,7 +18,7 @@ class LoadingIndicator extends StatelessWidget {
       colors: [Colors.pink[200]!, Colors.red[100]!, Colors.red[400]!],
 
       /// Optional, The color collections
-      strokeWidth: 1,
+      strokeWidth: 0,
 
       /// Optional, The stroke of the line, only applicable to widget which contains line
       // backgroundColor: Colors.black,      /// Optional, Background of the widget

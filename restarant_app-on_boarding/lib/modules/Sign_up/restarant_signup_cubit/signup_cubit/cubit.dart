@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,6 +22,16 @@ class SignUpCubit extends Cubit<RestarantSignUpStates> {
         uId: uId,
         image: 'assets/p.jpg',
         cover: 'assets/b.jpg');
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(uId)
+        .set(restarantUserModel.toMap())
+        .then((value) =>
+            emit(RestarantSignUPSuccessState(uId: restarantUserModel.uId)))
+        .catchError((onError) {
+      print('when save user get this error${onError.toString()}');
+      emit(RestarantSingUpErrorState(error: onError.toString()));
+    });
   }
 
   void userSignUp(
@@ -33,7 +44,7 @@ class SignUpCubit extends Cubit<RestarantSignUpStates> {
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) {
       print('The usr is sign up ${value.user}');
-      //createUser(email: email, name: name, phone: phone, uId: value.user!.uid);
+      createUser(email: email, name: name, phone: phone, uId: value.user!.uid);
     }).catchError((onError) {
       print('sign up error is${onError.toString}');
       emit(RestarantSingUpErrorState(error: onError));

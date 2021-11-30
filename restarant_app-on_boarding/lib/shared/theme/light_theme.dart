@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 
 class LightTheme {
   ThemeData lightTheme = ThemeData(
+    scaffoldBackgroundColor: Colors.red[50],
+    hoverColor: Colors.red[100]!,
     fontFamily: 'Cairo',
     focusColor: Colors.red[200],
     primaryColor: Colors.red[200],

@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
+import 'package:loading_indicator/loading_indicator.dart';
+import 'package:restarant_app/layouts/restarant_layout.dart';
 import 'package:restarant_app/modules/sign_in/cubit/cubit.dart';
 import 'package:restarant_app/modules/sign_in/cubit/states.dart';
+import 'package:restarant_app/shared/components/components.dart';
+import 'package:restarant_app/shared/components/show_toast.dart';
 import 'package:restarant_app/shared/shared_widgets/custom_text_form_feild.dart';
 
 class SignInSection extends StatelessWidget {
@@ -12,7 +17,10 @@ class SignInSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SignInCubit, RestarantSignInStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is RestarantSignInSuccessState)
+          navigateAndFinish(context, RestarantLayout());
+      },
       builder: (context, state) {
         return Form(
           key: formKey,
@@ -60,7 +68,7 @@ class SignInSection extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: CustomTextFormField(
                           isPassword: false,
-                          controller: emailController,
+                          controller: passwordController,
                           type: TextInputType.visiblePassword,
                           label: 'ادخل كلمة المرور',
                           prefix: Icons.lock,
@@ -88,26 +96,48 @@ class SignInSection extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
-                              child: MaterialButton(
-                                  color: Colors.red[200],
-                                  child: Text(
-                                    'دخول',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 19,
-                                        fontWeight: FontWeight.bold,
-                                        letterSpacing: 1,
-                                        fontFamily: 'Cairo'),
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20)),
-                                  onPressed: () {}),
-                              height: 1.4 *
-                                  (MediaQuery.of(context).size.height / 20),
-                              width:
-                                  5 * (MediaQuery.of(context).size.width / 10),
-                            ),
+                            Conditional.single(
+                                context: context,
+                                conditionBuilder: (context) =>
+                                    state is! RestarantSignInLoadingState,
+                                widgetBuilder: (context) {
+                                  return Container(
+                                    child: MaterialButton(
+                                        color: Colors.red[200],
+                                        child: Text(
+                                          'دخول',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 19,
+                                              fontWeight: FontWeight.bold,
+                                              letterSpacing: 1,
+                                              fontFamily: 'Cairo'),
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        onPressed: () {
+                                          SignInCubit.get(context).userLogin(
+                                              email: emailController.text,
+                                              password:
+                                                  passwordController.text);
+                                          print('geted started');
+                                        }),
+                                    height: 1.4 *
+                                        (MediaQuery.of(context).size.height /
+                                            20),
+                                    width: 5 *
+                                        (MediaQuery.of(context).size.width /
+                                            10),
+                                  );
+                                },
+                                fallbackBuilder: (context) {
+                                  return Center(
+                                      child: Container(
+                                          width: 50,
+                                          height: 50,
+                                          child: loadingIndicator()));
+                                }),
                           ],
                         ),
                       ),

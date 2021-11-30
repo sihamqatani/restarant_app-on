@@ -6,6 +6,7 @@ import 'package:restarant_app/modules/Sign_up/restarant_signup_cubit/signup_cubi
 //import 'package:restarant_app/layouts/restarant_layout.dart';
 
 import 'package:restarant_app/modules/onBoarding/onBoarding_screen.dart';
+import 'package:restarant_app/modules/sign_in/cubit/cubit.dart';
 import 'package:restarant_app/modules/sign_in/sign_in.dart';
 //import 'package:restarant_app/modules/sign_in/sign_in.dart';
 import 'package:restarant_app/shared/networks/cubit/cubit.dart';
@@ -62,6 +63,9 @@ class RestarantApp extends StatelessWidget {
                 ModeCubit()..changeAppMode(fromShared: isDark)),
         BlocProvider(
           create: (context) => SignUpCubit(),
+        ),
+        BlocProvider(
+          create: (context) => SignInCubit(),
         ),
       ],
       child: BlocConsumer<ModeCubit, ModeStates>(
