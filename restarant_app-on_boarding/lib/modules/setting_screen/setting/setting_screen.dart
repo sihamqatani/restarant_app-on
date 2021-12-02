@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restarant_app/modules/setting_screen/edit_user/edit_user.dart';
+import 'package:restarant_app/modules/sign_in/cubit/cubit.dart';
+import 'package:restarant_app/modules/sign_in/sign_in.dart';
 import 'package:restarant_app/shared/components/components.dart';
+import 'package:restarant_app/shared/components/show_toast.dart';
+import 'package:restarant_app/shared/navigator/navigate_and_finish.dart';
 import 'package:restarant_app/shared/networks/cubit/cubit.dart';
 import 'package:restarant_app/shared/networks/cubit/mode_cubit/mode_cubit.dart';
 import 'package:restarant_app/shared/networks/cubit/mode_cubit/mode_states.dart';
@@ -158,25 +162,35 @@ class SettingScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(
                         right: 15, bottom: 8, top: 8, left: 15),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.exit_to_app_outlined,
-                          color: Colors.red[200],
-                          size: 25,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          'تسجيل الخروج',
-                          style: TextStyle(
-                              color: ModeCubit.get(context).isDark
-                                  ? Colors.white70
-                                  : Colors.red[400],
-                              fontSize: 18),
-                        ),
-                      ],
+                    child: InkWell(
+                      onTap: () {
+                        SignInCubit.get(context).signOut();
+                        NavigateAndFinish()
+                            .navigateAndFinish(context, SignIn());
+                        ShowToast().showToast(
+                            message: 'تم تسجيل الخروج',
+                            state: ToastColorstate.SUCCESS);
+                      },
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.exit_to_app_outlined,
+                            color: Colors.red[200],
+                            size: 25,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'تسجيل الخروج',
+                            style: TextStyle(
+                                color: ModeCubit.get(context).isDark
+                                    ? Colors.white70
+                                    : Colors.red[400],
+                                fontSize: 18),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   Padding(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
-import 'package:loading_indicator/loading_indicator.dart';
 import 'package:restarant_app/models/catoregy/catogrey_model.dart';
 import 'package:restarant_app/models/food_details_model.dart/food_details_model.dart';
 import 'package:restarant_app/modules/home_screen/PopularFoodMenu/popular_food_menu.dart';

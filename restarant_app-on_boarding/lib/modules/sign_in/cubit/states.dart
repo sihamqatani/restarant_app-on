@@ -17,3 +17,14 @@ class RestarantSignInErrorState extends RestarantSignInStates {
     required this.error,
   });
 }
+
+class ChangePasswordSuess extends RestarantSignInStates {}
+
+class ChangrPasswordError extends RestarantSignInStates {
+  final String error;
+  ChangrPasswordError({
+    required this.error,
+  });
+}
+
+class SignOutState extends RestarantSignInStates {}

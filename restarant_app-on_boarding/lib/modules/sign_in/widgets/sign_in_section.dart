@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
-import 'package:loading_indicator/loading_indicator.dart';
 import 'package:restarant_app/layouts/restarant_layout.dart';
 import 'package:restarant_app/modules/sign_in/cubit/cubit.dart';
 import 'package:restarant_app/modules/sign_in/cubit/states.dart';
 import 'package:restarant_app/shared/components/components.dart';
-import 'package:restarant_app/shared/components/show_toast.dart';
+import 'package:restarant_app/shared/navigator/navigate_to.dart';
 import 'package:restarant_app/shared/shared_widgets/custom_text_form_feild.dart';
+
+import '../sign_in.dart';
+import 'change_password.dart';
 
 class SignInSection extends StatelessWidget {
   var formKey = GlobalKey<FormState>();
@@ -86,13 +88,16 @@ class SignInSection extends StatelessWidget {
                                     fontSize: 18,
                                     fontFamily: 'Cairo'),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                NavigateTo()
+                                    .navigateTo(context, ForgotPassword());
+                              },
                             ),
                           ],
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(5.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

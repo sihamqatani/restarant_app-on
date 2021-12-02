@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
-import 'package:loading_indicator/loading_indicator.dart';
 import 'package:restarant_app/modules/Sign_up/restarant_signup_cubit/signup_cubit/cubit.dart';
 import 'package:restarant_app/modules/Sign_up/restarant_signup_cubit/signup_cubit/states.dart';
 import 'package:restarant_app/modules/sign_in/sign_in.dart';
-import 'package:restarant_app/modules/sign_in/widgets/sign_in_section.dart';
 import 'package:restarant_app/shared/components/components.dart';
-import 'package:restarant_app/shared/components/loading_indicator.dart';
-import 'package:restarant_app/shared/components/show_toast.dart';
 import 'package:restarant_app/shared/navigator/navigate_and_finish.dart';
-import 'package:restarant_app/shared/navigator/navigate_to.dart';
 import 'package:restarant_app/shared/shared_widgets/custom_text_form_feild.dart';
 
 class SignUpSection extends StatelessWidget {
