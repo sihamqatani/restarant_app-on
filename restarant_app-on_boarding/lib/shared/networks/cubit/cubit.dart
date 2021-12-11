@@ -56,7 +56,9 @@ class RestaurantCubit extends Cubit<RestaurantStates> {
     emit(RestarantMealsLoadingState());
     FirebaseFirestore.instance.collection('meals').get().then((value) {
       value.docs.forEach((element) {
-        mealsModel.add(MealsModel.fromJson(element.data()));
+        if (element.get('isPopular') == true) {
+          mealsModel.add(MealsModel.fromJson(element.data()));
+        }
       });
       emit(RestarantMealsSucessState());
     }).catchError((error) {

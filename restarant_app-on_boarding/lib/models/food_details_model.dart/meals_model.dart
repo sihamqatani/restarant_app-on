@@ -5,6 +5,7 @@ class MealsModel {
   dynamic price;
   String? description;
   bool ispopular = false;
+  bool isVisible = false;
 
   MealsModel(
       {required this.name,
@@ -12,7 +13,8 @@ class MealsModel {
       this.noRating,
       this.price,
       this.description,
-      required this.ispopular});
+      required this.ispopular,
+      required this.isVisible});
   MealsModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     image = json['image'];
@@ -20,5 +22,6 @@ class MealsModel {
     price = json['price'];
     description = json['description'];
     ispopular = json['isPopular'];
+    isVisible = json['isVisible'];
   }
 }
