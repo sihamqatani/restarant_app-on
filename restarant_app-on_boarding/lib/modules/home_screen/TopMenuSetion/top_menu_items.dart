@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:restarant_app/models/catoregy/catogrey_model.dart';
+import 'package:restarant_app/models/catoregy/cateogries.dart';
 import 'package:restarant_app/modules/catogragy_screen/catogragy_screen.dart';
 import 'package:restarant_app/shared/navigator/navigate_to.dart';
 import 'package:restarant_app/shared/networks/cubit/mode_cubit/mode_cubit.dart';
 
 class TopMenuItems extends StatelessWidget {
-  Cateorgy menuType;
+  Cateogries menuType;
   TopMenuItems({Key? key, required this.menuType}) : super(key: key);
 
   @override
@@ -36,7 +36,11 @@ class TopMenuItems extends StatelessWidget {
                       width: 25,
                       height: 25,
                       child: Center(
-                        child: Image.asset(menuType.imageUrl),
+                        child: Image(
+                          image: NetworkImage(
+                            menuType.image,
+                          ),
+                        ),
                       ),
                     ),
                   ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
-import 'package:restarant_app/models/catoregy/catogrey_model.dart';
+import 'package:restarant_app/models/catoregy/cateogries.dart';
 import 'package:restarant_app/models/food_details_model.dart/food_details_model.dart';
 import 'package:restarant_app/modules/home_screen/PopularFoodMenu/popular_food_menu.dart';
 import 'package:restarant_app/modules/home_screen/TopMenuSetion/top_menu_section.dart';
@@ -13,17 +13,18 @@ import 'package:restarant_app/shared/networks/cubit/states.dart';
 import 'package:restarant_app/shared/shared_widgets/custom_text.dart';
 
 class HomeScreen extends StatelessWidget {
-  List<Cateorgy> menuType = [
-    Cateorgy('برجر', 'assets/Menus/burger.png'),
-    Cateorgy('بيتزا', 'assets/Menus/pizza-slice.png'),
-    Cateorgy('ايسكريم', 'assets/Menus/ice-cream.png'),
-    Cateorgy('لحم', 'assets/Menus/meat.png'),
-    Cateorgy('معجنات', 'assets/Menus/croissant.png'),
-    Cateorgy('دجاج', 'assets/Menus/chicken-leg.png'),
-    Cateorgy('سباجيتي', 'assets/Menus/noodles.png'),
-    Cateorgy('مشروبات', 'assets/Menus/cola.png'),
-    Cateorgy('أرز', 'assets/Menus/rice.png'),
-  ];
+  late List<Cateogries> menuType;
+  // List<Cateorgy> menuType = [
+  //  Cateorgy( 'برجر', 'assets/Menus/burger.png'),
+  //  Cateorgy('بيتزا', 'assets/Menus/pizza-slice.png'),
+  // Cateorgy('ايسكريم', 'assets/Menus/ice-cream.png'),
+  // Cateorgy('لحم', 'assets/Menus/meat.png'),
+  // Cateorgy('معجنات', 'assets/Menus/croissant.png'),
+  // Cateorgy('دجاج', 'assets/Menus/chicken-leg.png'),
+  // Cateorgy('سباجيتي', 'assets/Menus/noodles.png'),
+  // Cateorgy('مشروبات', 'assets/Menus/cola.png'),
+  // Cateorgy('أرز', 'assets/Menus/rice.png'),
+  // ];
   List<FoodDetails> foodDetails = [
     FoodDetails(
         name: 'رزمع الدجاج ',
@@ -71,7 +72,7 @@ class HomeScreen extends StatelessWidget {
                         SearchSection(hintText: 'اكتب الوجبة التي تريدها'),
                         Padding(
                           padding: const EdgeInsets.only(top: 20),
-                          child: TopMenuSection(menuType: menuType),
+                          child: TopMenuSection(),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -84,7 +85,7 @@ class HomeScreen extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: MoreRequestSection(imageSlider: imageSlider),
                         ),
-                        PopularFoodMenu(foodDetails: foodDetails)
+                        PopularFoodMenu()
                       ],
                     ),
                   ),

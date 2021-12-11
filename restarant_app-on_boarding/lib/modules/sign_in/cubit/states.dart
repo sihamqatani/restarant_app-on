@@ -28,3 +28,4 @@ class ChangrPasswordError extends RestarantSignInStates {
 }
 
 class SignOutState extends RestarantSignInStates {}
+

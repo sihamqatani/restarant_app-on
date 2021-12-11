@@ -1,6 +1,7 @@
 //import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restarant_app/layouts/restarant_layout.dart';
 
 import 'package:restarant_app/modules/Sign_up/restarant_signup_cubit/signup_cubit/cubit.dart';
 //import 'package:restarant_app/layouts/restarant_layout.dart';
@@ -24,10 +25,14 @@ void main() async {
   //print('the onBoard$onBoard');
 
   late Widget startWidget;
-  if (CashHelper.getData(key: 'onBoarding') == null) {
+  if (CashHelper.getData(key: 'onBoarding') == null &&
+      CashHelper.getData(key: 'uId') == null) {
     startWidget = OnBoardingScreen();
-  } else {
+  } else if (CashHelper.getData(key: 'onBoarding') != null &&
+      CashHelper.getData(key: 'uId') == null) {
     startWidget = SignIn();
+  } else {
+    startWidget = RestarantLayout();
   }
   late bool isDark;
   if (CashHelper.getData(key: 'isDark') != null) {
@@ -56,7 +61,9 @@ class RestarantApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => RestaurantCubit(),
+          create: (context) => RestaurantCubit()
+            ..getCatogries()
+            ..getMeals(),
         ),
         BlocProvider<ModeCubit>(
             create: (context) =>

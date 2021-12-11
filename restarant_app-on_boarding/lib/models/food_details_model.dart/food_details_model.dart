@@ -10,4 +10,10 @@ class FoodDetails {
     this.noRating,
     this.price,
   });
+  FoodDetails.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    imageUrl = json['imageUrl'];
+    noRating = json['norating'];
+    price = json['price'];
+  }
 }

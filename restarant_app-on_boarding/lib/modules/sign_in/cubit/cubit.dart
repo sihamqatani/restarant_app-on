@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restarant_app/modules/sign_in/cubit/states.dart';
-import 'package:restarant_app/shared/navigator/navigate_and_finish.dart';
 
 class SignInCubit extends Cubit<RestarantSignInStates> {
   SignInCubit() : super(RestarantSignInIntialState());
@@ -33,4 +32,6 @@ class SignInCubit extends Cubit<RestarantSignInStates> {
     FirebaseAuth.instance.signOut();
     emit(SignOutState());
   }
+ 
+ 
 }

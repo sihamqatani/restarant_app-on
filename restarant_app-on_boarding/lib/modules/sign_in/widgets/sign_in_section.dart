@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
@@ -6,9 +7,9 @@ import 'package:restarant_app/modules/sign_in/cubit/cubit.dart';
 import 'package:restarant_app/modules/sign_in/cubit/states.dart';
 import 'package:restarant_app/shared/components/components.dart';
 import 'package:restarant_app/shared/navigator/navigate_to.dart';
+import 'package:restarant_app/shared/networks/local/cash_helper/cash_helper.dart';
 import 'package:restarant_app/shared/shared_widgets/custom_text_form_feild.dart';
 
-import '../sign_in.dart';
 import 'change_password.dart';
 
 class SignInSection extends StatelessWidget {
@@ -20,8 +21,17 @@ class SignInSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<SignInCubit, RestarantSignInStates>(
       listener: (context, state) {
-        if (state is RestarantSignInSuccessState)
-          navigateAndFinish(context, RestarantLayout());
+        if (state is RestarantSignInSuccessState){
+           CashHelper.saveData(key: 'uId', value: state.uId).then((value) 
+           { navigateAndFinish(context, RestarantLayout());
+            //showToast(message: 'تم نسجيل الدخول بنجاح', state:ToastColorstate.SUCCESS);
+          });
+         }else if(state is RestarantSignInErrorState) {
+           print('failed Login');
+           
+         }
+         
+
       },
       builder: (context, state) {
         return Form(

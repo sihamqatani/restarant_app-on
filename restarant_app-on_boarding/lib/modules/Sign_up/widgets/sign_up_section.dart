@@ -5,6 +5,7 @@ import 'package:restarant_app/modules/Sign_up/restarant_signup_cubit/signup_cubi
 import 'package:restarant_app/modules/Sign_up/restarant_signup_cubit/signup_cubit/states.dart';
 import 'package:restarant_app/modules/sign_in/sign_in.dart';
 import 'package:restarant_app/shared/components/components.dart';
+import 'package:restarant_app/shared/components/show_toast.dart';
 import 'package:restarant_app/shared/navigator/navigate_and_finish.dart';
 import 'package:restarant_app/shared/shared_widgets/custom_text_form_feild.dart';
 
@@ -22,6 +23,10 @@ class SignUpSection extends StatelessWidget {
       if (state is RestarantSignUPSuccessState) {
         NavigateAndFinish().navigateAndFinish(context, SignIn());
         // navigateAndFinish(context, SignIn());
+        ShowToast().showToast(message: 'تم انشاء حسابك', state:ToastColorstate.SUCCESS);}
+        else {
+          ShowToast().showToast(message: 'لم يتم انشاء الحساب', state: ToastColorstate.ERROR);
+
 
       }
     }, builder: (context, state) {
