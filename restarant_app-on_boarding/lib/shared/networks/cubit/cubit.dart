@@ -76,15 +76,11 @@ class RestaurantCubit extends Cubit<RestaurantStates> {
   List<MealsModel> visibleMeals = [];
   void getVisibleMeals() {
     emit(RestarantVisibleMealsLoadingState());
-    FirebaseFirestore.instance
-        .collection('categories')
-        .doc('AFW6ZuwrRtxJbzna3fw5')
-        .collection('CheckenMenu')
-        .get()
-        .then((value) {
+    FirebaseFirestore.instance.collection('meals').get().then((value) {
       value.docs.forEach((element) {
-        // if (element.get('isVisible') == true) {
-        visibleMeals.add(MealsModel.fromJson(element.data()));
+        if (element.get('isVisible') == true) {
+          visibleMeals.add(MealsModel.fromJson(element.data()));
+        }
       });
       emit(RestarantVisibleMealsSucessState());
     }).catchError((error) {
@@ -100,16 +96,17 @@ class RestaurantCubit extends Cubit<RestaurantStates> {
     FirebaseFirestore.instance
         .collection('cateogries')
         .doc(cateogryId)
+        .collection('dishes')
         .get()
         .then((value) {
-      if (value.id == cateogryId)
-
-        //هنا يجيب الكوليكشن الخاص بكل منيو
-
-        emit(RestarantmenuMealsSucessState());
+      value.docs.forEach((element) {
+        menus.add(MealsModel.fromJson(element.data()));
+        print(element.data().toString());
+      });
+      emit(RestarantmenuMealsSucessState());
     }).catchError((onError) {
       emit(RestarantMenuMealsErrorState(error: onError));
-      print(onError.toString());
+      print('menu errror::${onError.toString()}');
     });
   }
 }

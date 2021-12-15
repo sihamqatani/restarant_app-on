@@ -93,7 +93,7 @@ class CatogryScreen extends StatelessWidget {
                                   padding: const EdgeInsets.only(
                                       top: 103, right: 22),
                                   child: Text(
-                                    cubit.menus[index].name.toString(),
+                                    cubit.menus[index].name,
                                     //'ستيك لحم مع الخضار',
                                     style: TextStyle(
                                         color: Colors.grey[600],
