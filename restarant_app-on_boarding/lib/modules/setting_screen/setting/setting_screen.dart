@@ -28,7 +28,7 @@ class SettingScreen extends StatelessWidget {
                     height: 125,
                     child: Center(
                       child: CircleAvatar(
-                        backgroundImage: AssetImage('assets/89.jpg'),
+                        backgroundImage: AssetImage('assets/44.jpg'),
                         radius: 38,
                       ),
                     ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:restarant_app/modules/onBoarding/onBoarding_screen.dart';
 
 class onBoardingItem extends StatelessWidget {
-  OnBoardingModel onBoardingModel;
+  final OnBoardingModel onBoardingModel;
   onBoardingItem({Key? key, required this.onBoardingModel}) : super(key: key);
 
   @override

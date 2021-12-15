@@ -61,10 +61,10 @@ class RestarantApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => RestaurantCubit()
-            ..getCatogries()
-            ..getMeals(),
-        ),
+            create: (context) => RestaurantCubit()
+              ..getCatogries()
+              ..getMeals()
+              ..getVisibleMeals()),
         BlocProvider<ModeCubit>(
             create: (context) =>
                 ModeCubit()..changeAppMode(fromShared: isDark)),

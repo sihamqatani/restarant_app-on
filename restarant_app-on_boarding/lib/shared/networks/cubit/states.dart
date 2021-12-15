@@ -22,3 +22,23 @@ class RestarantMealsErrorState extends RestaurantStates {
 
   RestarantMealsErrorState({required this.error});
 }
+
+class RestarantVisibleMealsLoadingState extends RestaurantStates {}
+
+class RestarantVisibleMealsSucessState extends RestaurantStates {}
+
+class RestarantVisibleMealsErrorState extends RestaurantStates {
+  final String error;
+
+  RestarantVisibleMealsErrorState({required this.error});
+}
+
+class RestarantMenuMealsLoadingState extends RestaurantStates {}
+
+class RestarantmenuMealsSucessState extends RestaurantStates {}
+
+class RestarantMenuMealsErrorState extends RestaurantStates {
+  final String error;
+
+  RestarantMenuMealsErrorState({required this.error});
+}

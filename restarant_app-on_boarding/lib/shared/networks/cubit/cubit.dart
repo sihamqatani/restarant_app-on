@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:restarant_app/models/catoregy/cateogries.dart';
+import 'package:restarant_app/models/catoregy/catogrey_model.dart';
 import 'package:restarant_app/models/food_details_model.dart/meals_model.dart';
 import 'package:restarant_app/modules/cart_screen/cart_screen.dart';
 import 'package:restarant_app/modules/favorites_screen/favorites_screen.dart';
@@ -15,6 +16,8 @@ class RestaurantCubit extends Cubit<RestaurantStates> {
   RestaurantCubit() : super(RestaurantInitialState());
   static RestaurantCubit get(context) => BlocProvider.of(context);
   var pageViewController = PageController();
+  MealsModel? mealsModel2;
+  Cateogries? cateogries;
   List<Widget> screens = [
     HomeScreen(),
     CartScreen(),
@@ -35,11 +38,14 @@ class RestaurantCubit extends Cubit<RestaurantStates> {
 
   //in this method will get Cateogry of meals.....
   List<Cateogries> catogry = [];
+  List<String> cateogryId = [];
   void getCatogries() {
     emit(RestarantGetcatogriesLoadingState());
     FirebaseFirestore.instance.collection('categories').get().then((value) {
       value.docs.forEach((element) {
         catogry.add(Cateogries.fromJson(element.data()));
+        cateogryId.add(element.id);
+        print(element.id.toString());
       });
       emit(RestarantGetcatogriesSucessState());
       print('the no of list of cateogries:${catogry.length}');
@@ -64,6 +70,46 @@ class RestaurantCubit extends Cubit<RestaurantStates> {
     }).catchError((error) {
       print(error.toString());
       emit(RestarantMealsErrorState(error: error));
+    });
+  }
+
+  List<MealsModel> visibleMeals = [];
+  void getVisibleMeals() {
+    emit(RestarantVisibleMealsLoadingState());
+    FirebaseFirestore.instance
+        .collection('categories')
+        .doc('AFW6ZuwrRtxJbzna3fw5')
+        .collection('CheckenMenu')
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        // if (element.get('isVisible') == true) {
+        visibleMeals.add(MealsModel.fromJson(element.data()));
+      });
+      emit(RestarantVisibleMealsSucessState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(RestarantVisibleMealsErrorState(error: error));
+    });
+  }
+
+  List<MealsModel> menus = [];
+
+  void getMenus(String cateogryId) {
+    emit(RestarantMenuMealsLoadingState());
+    FirebaseFirestore.instance
+        .collection('cateogries')
+        .doc(cateogryId)
+        .get()
+        .then((value) {
+      if (value.id == cateogryId)
+
+        //هنا يجيب الكوليكشن الخاص بكل منيو
+
+        emit(RestarantmenuMealsSucessState());
+    }).catchError((onError) {
+      emit(RestarantMenuMealsErrorState(error: onError));
+      print(onError.toString());
     });
   }
 }

@@ -29,7 +29,8 @@ class TopMenuSection extends StatelessWidget {
                   physics: BouncingScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (context, index) => TopMenuItems(
-                      menuType: RestaurantCubit.get(context).catogry[index]),
+                      menuType: RestaurantCubit.get(context).catogry[index],
+                      id: RestaurantCubit.get(context).cateogryId[index]),
                   //shrinkWrap: true,
 
                   itemCount: RestaurantCubit.get(context).catogry.length,
