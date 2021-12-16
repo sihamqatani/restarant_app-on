@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:restarant_app/models/cart_model/cart_model.dart';
 import 'package:restarant_app/models/catoregy/cateogries.dart';
 import 'package:restarant_app/models/catoregy/catogrey_model.dart';
 import 'package:restarant_app/models/food_details_model.dart/meals_model.dart';
+import 'package:restarant_app/models/restarant_user_model/user_model.dart';
 import 'package:restarant_app/modules/cart_screen/cart_screen.dart';
 import 'package:restarant_app/modules/favorites_screen/favorites_screen.dart';
 import 'package:restarant_app/modules/home_screen/home_screen.dart';
@@ -94,7 +96,7 @@ class RestaurantCubit extends Cubit<RestaurantStates> {
   void getMenus(String cateogryId) {
     emit(RestarantMenuMealsLoadingState());
     FirebaseFirestore.instance
-        .collection('cateogries')
+        .collection('categories')
         .doc(cateogryId)
         .collection('dishes')
         .get()
@@ -105,8 +107,17 @@ class RestaurantCubit extends Cubit<RestaurantStates> {
       });
       emit(RestarantmenuMealsSucessState());
     }).catchError((onError) {
-      emit(RestarantMenuMealsErrorState(error: onError));
+      emit(RestarantMenuMealsErrorState(error: onError.toString()));
       print('menu errror::${onError.toString()}');
     });
   }
+ RestarantUserModel?restarantUserModel;
+  void createcartItem(
+      {required String name,
+      required String image,
+      required dynamic price,
+      required dynamic counter}) {
+        CartModel.toMap
+        FirebaseFirestore.instance.collection('Users').doc(restarantUserModel!.uId).collection('cart').doc().set()
+      }
 }

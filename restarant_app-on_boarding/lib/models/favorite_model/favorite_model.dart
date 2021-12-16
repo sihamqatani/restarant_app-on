@@ -1,4 +1,4 @@
-class MealsModel {
+class FavoriteModel {
   late String name;
   late String image;
   dynamic noRating;
@@ -7,7 +7,7 @@ class MealsModel {
   bool isPopular = false;
   bool isVisible = false;
 
-  MealsModel(
+  FavoriteModel(
       {required this.name,
       required this.image,
       this.noRating,
@@ -15,7 +15,7 @@ class MealsModel {
       this.description,
       required this.isPopular,
       required this.isVisible});
-  MealsModel.fromJson(Map<String, dynamic> json) {
+  FavoriteModelfromJson(Map<String, dynamic> json) {
     name = json['name'];
     image = json['image'];
     noRating = json['noRating'];
